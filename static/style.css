@@ -1,0 +1,89 @@
+body {
+    font-family: system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    background-color: #f9f9f9;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1, h2, h3 {
+    color: #ee3124; /* Pizza Hut red */
+}
+
+.button {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #ee3124;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-right: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #d62b1f;
+}
+
+.button.delete {
+    background-color: #dc3545;
+}
+
+.button.cancel {
+    background-color: #6c757d;
+}
+
+.coupon {
+    background: white;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.coupon h3 {
+    margin-top: 0;
+}
+
+.actions {
+    margin-top: 10px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input[type="text"],
+.form-group input[type="date"],
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.form-group textarea {
+    min-height: 100px;
+}
+
+.expiring {
+    border-left: 4px solid #ee3124;
+    padding-left: 11px;
+    margin-bottom: 30px;
+}

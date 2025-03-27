@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Coupon Tracker</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Coupon Tracker</h1>
+
+        <a href="/add" class="button">Add Coupon</a>
+
+        <h2>Expiring Soon (within 3 days)</h2>
+        <div class="coupons expiring">
+            {% for item in expiring_soon %}
+            <div class="coupon">
+                <h3>{{ item.coupon.type }} - Expires: {{ item.coupon.display_date }}</h3>
+                {% if item.coupon.type == '15%' %}
+                <p>Code: {{ item.coupon.code }}</p>
+                {% elif item.coupon.type == '20%' %}
+                <p>Survey Code: {{ item.coupon.survey_code }}</p>
+                <p>ID: {{ item.coupon.id }}</p>
+                {% else %}
+                <p>{{ item.coupon.other_info }}</p>
+                {% endif %}
+                <div class="actions">
+                    <a href="/edit/{{ item.original_index }}" class="button">Edit</a>
+                    <a href="/delete/{{ item.original_index }}" class="button delete">Delete</a>
+                </div>
+            </div>
+            {% else %}
+            <p>No coupons expiring soon.</p>
+            {% endfor %}
+        </div>
+
+        <h2>All Coupons</h2>
+        <div class="coupons">
+            {% for coupon in coupons %}
+            <div class="coupon">
+                <h3>{{ coupon.type }} - Expires: {{ coupon.expiry_date }}</h3>
+                {% if coupon.type == '15%' %}
+                <p>Code: {{ coupon.code }}</p>
+                {% elif coupon.type == '20%' %}
+                <p>Survey Code: {{ coupon.survey_code }}</p>
+                <p>ID: {{ coupon.id }}</p>
+                {% else %}
+                <p>{{ coupon.other_info }}</p>
+                {% endif %}
+                <div class="actions">
+                    <a href="/edit/{{ loop.index0 }}" class="button">Edit</a>
+                    <a href="/delete/{{ loop.index0 }}" class="button delete">Delete</a>
+                </div>
+            </div>
+            {% else %}
+            <p>No coupons available.</p>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+
+</html>

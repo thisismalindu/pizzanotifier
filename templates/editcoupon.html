@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Coupon</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Edit Coupon</h1>
+        
+        <form method="POST">
+            <div class="form-group">
+                <label for="type">Coupon Type:</label>
+                <select id="type" name="type" required>
+                    <option value="15%" {% if coupon.type == '15%' %}selected{% endif %}>15% Off</option>
+                    <option value="20%" {% if coupon.type == '20%' %}selected{% endif %}>20% Off</option>
+                    <option value="other" {% if coupon.type == 'other' %}selected{% endif %}>Other</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="expiry_date">Expiry Date:</label>
+                <input type="date" id="expiry_date" name="expiry_date" value="{{ coupon.expiry_date }}" required>
+            </div>
+            
+            <div id="15-fields" class="coupon-fields" {% if coupon.type != '15%' %}style="display: none;"{% endif %}>
+                <div class="form-group">
+                    <label for="code">Coupon Code:</label>
+                    <input type="text" id="code" name="code" value="{{ coupon.code if coupon.type == '15%' else '' }}">
+                </div>
+            </div>
+            
+            <div id="20-fields" class="coupon-fields" {% if coupon.type != '20%' %}style="display: none;"{% endif %}>
+                <div class="form-group">
+                    <label for="survey_code">Survey Code:</label>
+                    <input type="text" id="survey_code" name="survey_code" value="{{ coupon.survey_code if coupon.type == '20%' else '' }}">
+                </div>
+                <div class="form-group">
+                    <label for="id">ID:</label>
+                    <input type="text" id="id" name="id" value="{{ coupon.id if coupon.type == '20%' else '' }}">
+                </div>
+            </div>
+            
+            <div id="other-fields" class="coupon-fields" {% if coupon.type != 'other' %}style="display: none;"{% endif %}>
+                <div class="form-group">
+                    <label for="other_info">Information:</label>
+                    <textarea id="other_info" name="other_info">{{ coupon.other_info if coupon.type == 'other' else '' }}</textarea>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <button type="submit" class="button">Update Coupon</button>
+                <a href="/" class="button cancel">Cancel</a>
+            </div>
+        </form>
+    </div>
+    
+    <script>
+        document.getElementById('type').addEventListener('change', function() {
+            const type = this.value;
+            document.querySelectorAll('.coupon-fields').forEach(el => {
+                el.style.display = 'none';
+            });
+            
+            if (type === '15%') {
+                document.getElementById('15-fields').style.display = 'block';
+            } else if (type === '20%') {
+                document.getElementById('20-fields').style.display = 'block';
+            } else {
+                document.getElementById('other-fields').style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
